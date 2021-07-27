@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { crearNuevoProductoAction } from "../actions/productoActions";
 import { useState } from "react";
 
-const NuevoProducto = () => {
+const NuevoProducto = ({history}) => {
   //utilizar useDispact para acceder a la funcion dispatch
   const dispatch = useDispatch();
 
@@ -31,6 +31,7 @@ const NuevoProducto = () => {
 
     //crear el nuevo producto
     agregarProducto({ nombre, precio });
+    history.push("/");
   };
 
   return (
