@@ -4,13 +4,18 @@ import {
   AGREGAR_PRODUCTO_EXITO,
 } from "../types";
 
+import clienteAxios from "../config/axios";
+
 //Crear nuevos productos
 export function crearNuevoProductoAction(producto) {
-  return (dispatch) => {
+  return async(dispatch) => {
     dispatch(agregarProducto());
     try {
+      //insertar en la API
+      await clienteAxios.post("/productos", producto);
       dispatch(agregarProductoExito(producto));
     } catch (error) {
+      console.log(error);
       dispatch(agregarProductoError(true));
     }
   };
