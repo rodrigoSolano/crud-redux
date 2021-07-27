@@ -4,7 +4,10 @@ import {
   AGREGAR_PRODUCTO_EXITO,
   COMENZAR_DESCARGA_PRODUCTOS,
   COMENZAR_DESCARGA_PRODUCTOS_ERROR,
-  COMENZAR_DESCARGA_PRODUCTOS_EXITO
+  COMENZAR_DESCARGA_PRODUCTOS_EXITO,
+  OBTENER_PRODUCTO_ELIMINAR,
+  PRODUCTO_ELIMINADO_ERROR,
+  PRODUCTO_ELIMINADO_EXITO,
 } from "../types";
 
 const initialState = {
@@ -12,6 +15,7 @@ const initialState = {
   loading: false,
   errorMessage: "",
   error: false,
+  productoeliminar: null,
 };
 
 export default function (state = initialState, action) {
@@ -49,6 +53,20 @@ export default function (state = initialState, action) {
         loading: false,
         error: false,
         productos: action.payload,
+      };
+    case OBTENER_PRODUCTO_ELIMINAR:
+      return {
+        ...state,
+        productoeliminar: action.payload,
+      };
+
+    case PRODUCTO_ELIMINADO_EXITO:
+      return {
+        ...state,
+        productos: state.productos.filter(
+          (producto) => producto.id != state.productoeliminar
+        ),
+        productoeliminar: null,
       };
 
     default:
