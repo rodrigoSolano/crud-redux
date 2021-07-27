@@ -15,6 +15,10 @@ const NuevoProducto = () => {
   //mandar a llamar a la funcion de productoAction
   const agregarProducto = (producto) => dispatch(crearNuevoProductoAction(producto));
 
+  //Acceder al state del store
+  const cargando = useSelector(state => state.productos.loading)
+  const error = useSelector(state => state.productos.error)
+  
   //cuando el usuario haga sumbmit
   const submitNuevoProducto = (e) => {
     e.preventDefault();
@@ -68,6 +72,9 @@ const NuevoProducto = () => {
                 Agregar Producto
               </button>
             </form>
+
+            {error && <p className="alert alert-danger p2">Hubo un error</p>}
+
           </div>
         </div>
       </div>
