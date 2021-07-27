@@ -2,6 +2,9 @@ import {
   AGREGAR_PRODUCTO,
   AGREGAR_PRODUCTO_ERROR,
   AGREGAR_PRODUCTO_EXITO,
+  COMENZAR_DESCARGA_PRODUCTOS,
+  COMENZAR_DESCARGA_PRODUCTOS_ERROR,
+  COMENZAR_DESCARGA_PRODUCTOS_EXITO
 } from "../types";
 
 const initialState = {
@@ -31,6 +34,21 @@ export default function (state = initialState, action) {
         ...state,
         loading: false,
         error: action.payload,
+      };
+
+    case COMENZAR_DESCARGA_PRODUCTOS:
+      return {
+        ...state,
+        loading: action.payload,
+        error: false,
+      };
+
+    case COMENZAR_DESCARGA_PRODUCTOS_EXITO:
+      return {
+        ...state,
+        loading: false,
+        error: false,
+        productos: action.payload,
       };
 
     default:
